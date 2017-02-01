@@ -21,7 +21,7 @@ void dataBis(int Databis[], int P[], int N[]){
         	}
    	 }
 }
-int tripleZero(int Databis[], int v, int nint *neg){
+int tripleZero(int Databis[], int v, int n,int *neg){
 	printf("\n\n\n%i\n\n\n", v);
 	// cas ou V est positif	
 	if(v==1){
