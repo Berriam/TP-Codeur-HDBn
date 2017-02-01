@@ -21,6 +21,43 @@ void dataBis(int Databis[], int P[], int N[]){
         }
     }
 }
+int tripleZero(int Data, int v, int n){
+	// cas ou V est positif	
+	if(v==1){
+		if (Data[n-3]==1){
+			Data[n]=-1;
+			Data[n-2]=-1;
+		}
+		else if(Data[n-3]==-1){
+			Data[n]=-1;
+		}
+	}
+	
+	//cas ou V est negatif
+	if(v==-1){
+		if (Data[n-3]==-1){
+			Data[n]=1;
+			Data[n-2]=1;
+		}
+		else if(Data[n-3]==1){
+			Data[n]=1;
+		}
+	}
+	return -v;
+} 
+
+int convertTab(int Data,Data_conv,v){
+	int n,comptZeros=0;
+	for(n=0;n<NBITS;n++){
+		if(Data[n]==0) comptZeros++;
+		if(comptZeros==3){
+			v=tripleZeros(Data_conv[],v,n);
+			comptZeros=0;
+		}
+		else Data_conv[n]=Data[n]; 
+	}
+	return v;
+}
                
 void afficher(
                
