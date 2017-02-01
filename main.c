@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int NBITS = 24;
+#define NBITS 24
 
 void initZero(int tab[], int taille){
     int i;
