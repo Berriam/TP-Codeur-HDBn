@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #define NBITS 23
-#define NHDM 3
+#define NHDM 2
 
 void initZero(int tab[], int taille){
     	int i;
@@ -25,12 +25,12 @@ void dataBis(int Databis[], int P[], int N[]){
 int tripleZero(int Databis[], int v, int n,int *neg){
 	// cas ou V est positif	
 	if(v==1){
-		if (Databis[n-NHDM]==1){
+		if (Databis[n-(NHDM+1)]==1){
 			Databis[n]=-1;
-			Databis[n-(NHDM-1)]=-1;
+			Databis[n-NHDM]=-1;
 			*neg=1;
 		}
-		else if(Databis[n-NHDM]==-1){
+		else if(Databis[n-(NHDM+1)]==-1){
 			Databis[n]=-1;
 			*neg=1;
 		}
@@ -38,12 +38,12 @@ int tripleZero(int Databis[], int v, int n,int *neg){
 	
 	//cas ou V est negatif
 	if(v==-1){
-		if (Databis[n-NHDM]==-1){
+		if (Databis[n-(NHDM+1)]==-1){
 			Databis[n]=1;
-			Databis[n-(NHDM-1)]=1;
+			Databis[n-NHDM]=1;
 			*neg=-1;
 		}
-		else if(Databis[n-NHDM]==1){
+		else if(Databis[n-(NHDM+1)]==1){
 			Databis[n]=1;
 			*neg=-1;
 		}
@@ -59,7 +59,7 @@ void convertTab(int Data[], int Databis[], int v){
 			 Databis[n] = 0;
 		}
 		
-		if(comptZeros==NHDM){
+		if(comptZeros==(NHDM+1)){
 			
 			v=tripleZero(Databis,v,n,&neg);
 			comptZeros=0;
