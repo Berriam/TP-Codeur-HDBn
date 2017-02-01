@@ -47,16 +47,16 @@ int tripleZero(int Data[], int v, int n){
 } 
 
 int convertTab(int Data[], int Databis[], int v){
-	int n,comptZeros=0,neg=0;
+	int n,comptZeros=0,neg=1;
 	for(n=0;n<NBITS;n++){
 		if(Data[n]==0) comptZeros++;
 		if(comptZeros==3){
 			v=tripleZero(Databis,v,n);
 			comptZeros=0;
 		}
-		else{
-			if(neg==0)Databis[n]=Data[n]; 
-			else if(neg==1)Databis[n]=-Data[n];
+		else if(Data[n]!=0){
+			if(neg==1)Databis[n]=Data[n]; 
+			else if(neg==-1)Databis[n]=-Data[n];
 			neg=-neg;
 		}	
 	}
