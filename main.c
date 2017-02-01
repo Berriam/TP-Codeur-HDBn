@@ -1,3 +1,4 @@
+// realisé par BRINON Baptiste et BERARD William
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -10,7 +11,7 @@ void initZero(int tab[], int taille){
      	   tab[i] = 0; 
     	}
 }
-
+// conversion de Databis en 2 tableaux P et N
 void dataBis(int Databis[], int P[], int N[]){
     	int i;
     	for(i = 0; i < NBITS; i++){
@@ -22,17 +23,18 @@ void dataBis(int Databis[], int P[], int N[]){
         	}
    	 }
 }
-int tripleZero(int Databis[], int v, int n,int *neg){
+// applique l'algorithme en cas de depassement du nombre autorisé de zeros de suite
+int tropZero(int Databis[], int v, int n,int *signe){
 	// cas ou V est positif	
 	if(v==1){
 		if (Databis[n-(NHDM+1)]==1){
 			Databis[n]=-1;
 			Databis[n-NHDM]=-1;
-			*neg=1;
+			*signe=1;
 		}
 		else if(Databis[n-(NHDM+1)]==-1){
 			Databis[n]=-1;
-			*neg=1;
+			*signe=1;
 		}
 	}
 	
@@ -41,34 +43,36 @@ int tripleZero(int Databis[], int v, int n,int *neg){
 		if (Databis[n-(NHDM+1)]==-1){
 			Databis[n]=1;
 			Databis[n-NHDM]=1;
-			*neg=-1;
+			*signe=-1;
 		}
 		else if(Databis[n-(NHDM+1)]==1){
 			Databis[n]=1;
-			*neg=-1;
+			*signe=-1;
 		}
 	}
 	return -v;
 } 
 
 void convertTab(int Data[], int Databis[], int v){
-	int n,comptZeros=0,neg=1;
+	int n,comptZeros=0,signe=1; // signe indique si le 1 à venir est negatif ou positif
 	for(n=0;n<NBITS;n++){
+		//cas ou le chiffre traité est 0
 		if(Data[n]==0){
 			 comptZeros++;
-			 Databis[n] = 0;
+			// verification du depassement ou non de 0 autorisés
+			if(comptZeros==(NHDM+1)){	
+				v=tropZero(Databis,v,n,&signe);
+				comptZeros=0;
+			}
+			else Databis[n] = 0;
 		}
 		
-		if(comptZeros==(NHDM+1)){
-			
-			v=tripleZero(Databis,v,n,&neg);
-			comptZeros=0;
-		}
-		else if(Data[n]!=0){
+		// cas s'il s'agit de 1
+		else {
 			comptZeros = 0;
-			if(neg==1)Databis[n]=Data[n]; 
-			else if(neg==-1)Databis[n]=-Data[n];
-			neg=-neg;
+			if(signe==1)Databis[n]=Data[n]; 
+			else if(signe==-1)Databis[n]=-Data[n];
+			signe=-signe;
 		}	
 	}
 }
