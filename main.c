@@ -63,7 +63,7 @@ void main(){
     int v = -1;
     int P[NBITS];
     int N[NBITS];
-    int dataBis[NBITS];
+    int DataBis[NBITS];
     initZero(N, NBITS);
     initZero(P, NBITS);
     int Data[NBITS]={1,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0}; 
