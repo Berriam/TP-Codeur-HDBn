@@ -28,11 +28,11 @@ int tripleZero(int Databis[], int v, int n,int *neg){
 		if (Databis[n-3]==1){
 			Databis[n]=-1;
 			Databis[n-2]=-1;
-			*neg=-1;
+			*neg=1;
 		}
 		else if(Databis[n-3]==-1){
 			Databis[n]=-1;
-			*neg=-1;
+			*neg=1;
 		}
 	}
 	
@@ -41,11 +41,11 @@ int tripleZero(int Databis[], int v, int n,int *neg){
 		if (Databis[n-3]==-1){
 			Databis[n]=1;
 			Databis[n-2]=1;
-			*neg=1;
+			*neg=-1;
 		}
 		else if(Databis[n-3]==1){
 			Databis[n]=1;
-			*neg=1;
+			*neg=-1;
 		}
 	}
 	return -v;
