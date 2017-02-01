@@ -46,15 +46,15 @@ int tripleZero(int Data, int v, int n){
 	return -v;
 } 
 
-int convertTab(int Data,Data_conv,v){
+int convertTab(int Data,Databis,v){
 	int n,comptZeros=0;
 	for(n=0;n<NBITS;n++){
 		if(Data[n]==0) comptZeros++;
 		if(comptZeros==3){
-			v=tripleZeros(Data_conv[],v,n);
+			v=tripleZeros(Databis[],v,n);
 			comptZeros=0;
 		}
-		else Data_conv[n]=Data[n]; 
+		else Databis[n]=Data[n]; 
 	}
 	return v;
 }
