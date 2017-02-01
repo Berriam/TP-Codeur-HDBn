@@ -59,8 +59,6 @@ int convertTab(int Data,Data_conv,v){
 	return v;
 }
                
-void afficher(
-               
 void main(){
     int v = -1;
     int P[NBITS];
