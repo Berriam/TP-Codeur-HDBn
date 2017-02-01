@@ -1,9 +1,31 @@
-// realisé par BRINON Baptiste et BERARD William
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define NBITS 23
 #define NHDM 2
+
+
+
+void decodeur(int Databis[], int Data[]){
+	int i;
+	int j;
+	int d_bit = 0;
+	for(i = 0; i < NBITS; i++){
+		if(Databis[i] == -d_bit || Databis[i] == 0){
+			Data[i] = fabs(Databis[i]);
+			if(Databis[i] == -d_bit) d_bit = -d_bit;
+		}
+		else if(Databis[i] == d_bit){
+			for(j = i; j >= i-NHDM; j--) Data[j] = 0;
+		}
+		else if(Databis[i] != 0){
+			Data[i] = 1;
+			d_bit = 1;
+		}
+		
+	}
+}
 
 void initZero(int tab[], int taille){
     	int i;
@@ -85,8 +107,30 @@ void afficher(int P[], int N[]){
 	}
 	printf("\n");
 }
+
+void afftemp(int tab[]){
+	int i;
+	printf("\n\n\n");
+	for(i = 0; i < NBITS; i++){
+		printf("%i ", tab[i]);
+	}
+	printf("\n\n\n");
+}
+
+void NPtoDB(int P[], int N[], int Databis[]){
+	int i;
+	initZero(Databis, NBITS);
+	for(i = 0; i < NBITS; i++){
+		if(P[i]) Databis[i] = 1;
+		if(N[i]) Databis[i] = -1;
+	}
+}
+
                
 void main(){
+	//			//
+	int temp[NBITS];	
+	//			//
 	int v = -1;
     	int P[NBITS];
     	int N[NBITS];
@@ -97,4 +141,7 @@ void main(){
     	convertTab(Data, Databis, v);
     	dataBis(Databis, P, N);
     	afficher(P, N);
+    	NPtoDB(P, N, Databis);
+    	decodeur(Databis, temp);
+    	afftemp(temp);
 }
