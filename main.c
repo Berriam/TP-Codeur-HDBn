@@ -21,16 +21,18 @@ void dataBis(int Databis[], int P[], int N[]){
         	}
    	 }
 }
-int tripleZero(int Databis[], int v, int n){
+int tripleZero(int Databis[], int v, int nint *neg){
 	printf("\n\n\n%i\n\n\n", v);
 	// cas ou V est positif	
 	if(v==1){
 		if (Databis[n-3]==1){
 			Databis[n]=-1;
 			Databis[n-2]=-1;
+			*neg=-1;
 		}
 		else if(Databis[n-3]==-1){
 			Databis[n]=-1;
+			*neg=-1;
 		}
 	}
 	
@@ -39,9 +41,11 @@ int tripleZero(int Databis[], int v, int n){
 		if (Databis[n-3]==-1){
 			Databis[n]=1;
 			Databis[n-2]=1;
+			*neg=1;
 		}
 		else if(Databis[n-3]==1){
 			Databis[n]=1;
+			*neg=1;
 		}
 	}
 	return -v;
@@ -57,7 +61,7 @@ void convertTab(int Data[], int Databis[], int v){
 		
 		if(comptZeros==3){
 			
-			v=tripleZero(Databis,v,n);
+			v=tripleZero(Databis,v,n,&neg);
 			comptZeros=0;
 		}
 		else if(Data[n]!=0){
