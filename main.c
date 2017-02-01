@@ -46,7 +46,7 @@ int tripleZero(int Data[], int v, int n){
 	return -v;
 } 
 
-int convertTab(int Data[], int Databis[], int v){
+void convertTab(int Data[], int Databis[], int v){
 	int n,comptZeros=0,neg=1;
 	for(n=0;n<NBITS;n++){
 		if(Data[n]==0) comptZeros++;
@@ -60,7 +60,6 @@ int convertTab(int Data[], int Databis[], int v){
 			neg=-neg;
 		}	
 	}
-	return v;
 }
 
 void afficher(int Databis[]){
