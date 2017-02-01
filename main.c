@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NBITS 24
+#define NBITS 23
 
 void initZero(int tab[], int taille){
     	int i;
@@ -22,7 +22,6 @@ void dataBis(int Databis[], int P[], int N[]){
    	 }
 }
 int tripleZero(int Databis[], int v, int n,int *neg){
-	printf("\n\n\n%i\n\n\n", v);
 	// cas ou V est positif	
 	if(v==1){
 		if (Databis[n-3]==1){
@@ -73,11 +72,11 @@ void convertTab(int Data[], int Databis[], int v){
 	}
 }
 
-void afficher(int Databis[]){
+void afficher(int P[], int N[]){
 	int i;
 	printf("\n");
 	for(i = 0; i < NBITS; i++){
-		printf("%i ", Databis[i]);
+		printf("%i ", P[i]-1*N[i]);
 	}
 	printf("\n");
 }
@@ -92,6 +91,5 @@ void main(){
     	int Data[NBITS]={1,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0}; 
     	convertTab(Data, Databis, v);
     	dataBis(Databis, P, N);
-    	afficher(Data);
-    	afficher(Databis);
+    	afficher(P, N);
 }
