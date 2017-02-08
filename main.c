@@ -108,7 +108,7 @@ void afficher(int P[], int N[]){
 	printf("\n");
 }
 
-void afftemp(int tab[]){
+void afftab(int tab[]){
 	int i;
 	printf("\n\n\n");
 	for(i = 0; i < NBITS; i++){
@@ -127,10 +127,23 @@ void NPtoDB(int P[], int N[], int Databis[]){
 }
 
                
-void main(){
-	//			//
-	int temp[NBITS];	
-	//			//
+void main(){/*
+	int choix = 0;
+	while(choix != 3){
+		printf("1. encoder\n");
+		printf("2. décoder\n");
+		printf("3. quitter\n");
+		printf("entrez votre choix:");
+		scanf("%i", &choix);
+		while (choix < 1 || choix > 3){
+			printf("choix incorrect.\n");
+			printf("entrez votre choix:");
+			scanf("%i", &choix);		
+		}
+		
+	}*/
+	
+	int NData[NBITS];
 	int v = -1;
     	int P[NBITS];
     	int N[NBITS];
@@ -142,6 +155,6 @@ void main(){
     	dataBis(Databis, P, N);
     	afficher(P, N);
     	NPtoDB(P, N, Databis);
-    	decodeur(Databis, temp);
-    	afftemp(temp);
+    	decodeur(Databis, NData);
+    	afftab(NData);
 }
