@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define NBITS 23
 #define NHDM 2
 
+int NBITS = 500;
 
 
 void decodeur(int Databis[], int Data[]){
@@ -126,24 +126,82 @@ void NPtoDB(int P[], int N[], int Databis[]){
 	}
 }
 
+void entrerSequence(int Data[]){
+	char serie[500];
+	char c;
+	int i;
+	printf("entrez une série sans espace terminée par f: ");
+	scanf("%s", serie);
+	for(i = 0; i < 500; i++){
+		c = serie[i];
+		if(c != 'f' && c != '0' && c !='1'){
+			printf("valeur %i incorrecte", i);
+			break;
+		}
+		else {
+			switch(c){
+				case '0': Data[i] = 0; break;
+				case '1': Data[i] = 1; break;
+				case 'f': NBITS = i; i = 500; break;
+			}
+		}
+	}
+}
+
+
+int encoder(int P[], int N[]){
+	int choix = 0;
+	int v = -1;
+    	int Databis[NBITS];
+
+    	int Data[NBITS]; 
+    	
+	printf("1. entrer une séquence à décoder\n");
+	printf("2. décoder une séquence d'un fichier\n");
+	printf("3. retour");
+	printf("votre choix: ");
+	scanf("%i", &choix);
+	while (choix < 1 || choix > 3){
+		printf("choix incorrect.\n");
+		printf("entrez votre choix: ");
+		scanf("%i", &choix);		
+	}
+	switch(choix){
+		case 1: entrerSequence(Data); break;
+		case 2: /*parFichier(2, NBITS, NHDM, Data);*/ break;
+		case 3: return 1; break;
+		default: printf("erreur"); break;
+	}
+	convertTab(Data, Databis, v);
+    	dataBis(Databis, P, N);
+    	afficher(P, N);
+}  
                
-void main(){/*
+void main(){
+	int P[NBITS];
+	int N[NBITS];
+    	initZero(N, NBITS);
+    	initZero(P, NBITS);
 	int choix = 0;
 	while(choix != 3){
 		printf("1. encoder\n");
 		printf("2. décoder\n");
 		printf("3. quitter\n");
-		printf("entrez votre choix:");
+		printf("entrez votre choix: ");
 		scanf("%i", &choix);
 		while (choix < 1 || choix > 3){
 			printf("choix incorrect.\n");
-			printf("entrez votre choix:");
+			printf("entrez votre choix: ");
 			scanf("%i", &choix);		
 		}
-		
-	}*/
-	
-	int NData[NBITS];
+		switch(choix){
+			case 1: choix = encoder(P, N); break;
+			case 2: /*choix = decoder();*/ break;
+			case 3: break;
+			default: printf("erreur"); break;
+		}
+	}
+	int NData[NBITS];/*
 	int v = -1;
     	int P[NBITS];
     	int N[NBITS];
@@ -153,8 +211,9 @@ void main(){/*
     	int Data[NBITS]={1,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0}; 
     	convertTab(Data, Databis, v);
     	dataBis(Databis, P, N);
-    	afficher(P, N);
-    	NPtoDB(P, N, Databis);
-    	decodeur(Databis, NData);
+    	afficher(P, N);*/
+    	
+    	/*NPtoDB(P, N, Databis);
+    	decodeur(Databis, NData);*/
     	afftab(NData);
 }
