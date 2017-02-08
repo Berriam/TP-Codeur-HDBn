@@ -8,6 +8,7 @@ int NBITS = 500;
 
 
 void decodeur(int Databis[], int Data[]){
+// fonction qui décode
 	int i;
 	int j;
 	int d_bit = 0;
@@ -127,6 +128,7 @@ void NPtoDB(int P[], int N[], int Databis[]){
 }
 
 void entrerSequence(int Data[]){
+	int nb_neg = 0; 
 	char serie[500];
 	char c;
 	int i;
@@ -134,15 +136,17 @@ void entrerSequence(int Data[]){
 	scanf("%s", serie);
 	for(i = 0; i < 500; i++){
 		c = serie[i];
-		if(c != 'f' && c != '0' && c !='1'){
+		if(c != 'f' && c != '0' && c !='1' && c !='-'){
 			printf("valeur %i incorrecte", i);
 			break;
 		}
 		else {
 			switch(c){
-				case '0': Data[i] = 0; break;
-				case '1': Data[i] = 1; break;
-				case 'f': NBITS = i; i = 500; break;
+				case '0': Data[i-nb_neg] = 0; break;
+				case '-': Data[i-nb_neg] = -1; i++; nb_neg++; break;
+				case '1': Data[i-nb_neg] = 1; break;
+				case 'f': NBITS = (i-nb_neg); i = 500; break;
+				
 			}
 		}
 	}
@@ -156,26 +160,49 @@ int encoder(int P[], int N[]){
 
     	int Data[NBITS]; 
     	
-	printf("1. entrer une séquence à décoder\n");
-	printf("2. décoder une séquence d'un fichier\n");
-	printf("3. retour");
+	printf("1. entrer une séquence à encoder\n");
+	printf("2. retour\n");
 	printf("votre choix: ");
 	scanf("%i", &choix);
-	while (choix < 1 || choix > 3){
+	while (choix < 1 || choix > 2){
 		printf("choix incorrect.\n");
 		printf("entrez votre choix: ");
 		scanf("%i", &choix);		
 	}
 	switch(choix){
 		case 1: entrerSequence(Data); break;
-		case 2: /*parFichier(2, NBITS, NHDM, Data);*/ break;
-		case 3: return 1; break;
+		case 2: return 1; break;
 		default: printf("erreur"); break;
 	}
 	convertTab(Data, Databis, v);
     	dataBis(Databis, P, N);
+    	printf("données encodées:\n");
     	afficher(P, N);
 }  
+
+int decoder(){
+	int choix = 0;
+    	int Databis[NBITS];
+    	int NData[NBITS];
+	printf("1. entrer une séquence à décoder\n");
+	printf("2. retour\n");
+	printf("votre choix: ");
+	scanf("%i", &choix);
+	while (choix < 1 || choix > 2){
+		printf("choix incorrect.\n");
+		printf("entrez votre choix: ");
+		scanf("%i", &choix);		
+	}
+	switch(choix){
+		case 1: entrerSequence(Databis); break;
+		case 2: return 1; break;
+		default: printf("erreur"); break;
+	}
+	
+	decodeur(Databis, NData);
+	printf("données décodées:\n");
+	afftab(NData);
+}
                
 void main(){
 	int P[NBITS];
@@ -196,24 +223,9 @@ void main(){
 		}
 		switch(choix){
 			case 1: choix = encoder(P, N); break;
-			case 2: /*choix = decoder();*/ break;
+			case 2: choix = decoder(); break;
 			case 3: break;
 			default: printf("erreur"); break;
 		}
 	}
-	int NData[NBITS];/*
-	int v = -1;
-    	int P[NBITS];
-    	int N[NBITS];
-    	int Databis[NBITS];
-    	initZero(N, NBITS);
-    	initZero(P, NBITS);
-    	int Data[NBITS]={1,0,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0}; 
-    	convertTab(Data, Databis, v);
-    	dataBis(Databis, P, N);
-    	afficher(P, N);*/
-    	
-    	/*NPtoDB(P, N, Databis);
-    	decodeur(Databis, NData);*/
-    	afftab(NData);
 }
